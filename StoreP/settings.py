@@ -16,8 +16,25 @@ SECRET_KEY = 'django-insecure-$+sev)o+#3o4!7n+(5ihnjy58i+m!-@w%w(1y9rz$93w!sr5cg
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://jewelry-store-production-fca3.up.railway.app/', 'https://felfeljewelry.com/']
 
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CSRF_TRUSTED_ORIGINS = ['https://jewelry-store-production-fca3.up.railway.app/']
+
+CORS_REPLACE_HTTPS_REFERER = True
+
+CSRF_COOKIE_DOMAIN = 'bluemix.net'
+
+CORS_ORIGIN_WHITELIST = (
+    'https://jewelry-store-production-fca3.up.railway.app/',
+    'jewelry-store-production-fca3.up.railway.app',
+    'railway.app',
+)
 
 # Application definition
 
