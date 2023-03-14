@@ -1,0 +1,101 @@
+.container{
+    font-family: sans-serif;
+}
+
+.header{
+    background-image: url("../Images/Fel.png");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+input[type='search']{
+    width: 60%;
+    padding: 12px;
+    border-radius: 2px;
+    border: none;
+    margin: 50px;
+}
+
+input[type='search']:focus{
+    outline: none;
+}
+
+.jewelry{
+    width:100%;
+    text-align: center;
+    background-color: rgba(239, 207, 33, 0.07);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: sticky;
+    top: 0;
+
+}
+
+.jewelry a{
+    color: #212121;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+.jewelry a:hover{
+    color: navajowhite;
+}
+
+.userbio{
+    margin: 20px;
+    cursor: pointer;
+}
+
+.links{
+    margin: 20px;
+}
+
+.links a{
+    margin: 10px;
+    cursor: pointer;
+    color: navajowhite;
+}
+
+.userlist{
+    margin: 20px;
+}
+
+.userlist img{
+    margin: 10px;
+    cursor: pointer
+}
+
+.logo{
+    margin: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+
+    .header{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        justify-items: center;
+        align-items: center;
+    }
+
+    input[type='search']{
+        width: 100%;
+        margin:0;
+        border-radius: 0;
+        grid-column: 1/3;
+    }
+
+    .jewelry a{
+        margin: 5px;
+    }
+
+}

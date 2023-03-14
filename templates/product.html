@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>{{product.type}} | {{product.name}}</title>{% endblock %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{% static 'styles/product.css' %}">
+
+<div class="product">
+    <div>
+        <img src={{product.img.url}}>
+    </div>
+
+    <div class='details'>
+
+        <h1>{{product.name}}</h1>
+        <h3>{{product.price}} L.E.</h3>
+        <h4>Left: {{product.left}}</h4>
+        <input type='number' value="{{product.left}}" style='display:none' id='quantity_in_stock'>
+
+        {% if product.on_stock == True %}
+        
+        <span class="stock stock_green"></span><label style='color: green'>In stock</label>
+        {% endif %}
+
+        {% if product.on_stock == False %}
+        <span class="stock stock_red"></span><label style='color: rgb(192, 0, 0)'>Out Of Stock</label>
+        {% endif %}
+
+        <p>{{product.description}}</p>
+
+        <div class="cart_options">
+            
+            <form method='post' action="{% url 'add_to_cart' product.pk %}">
+                {% csrf_token %}
+                
+                <input type="number" id="quantity" placeholder="Quantity" name='quantity'>
+                <button type='submit' id='add_to_cart'>Add to cart</button>
+
+            </form>
+            <span id='message'>Please check the left in stock</span>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    let quantity = document.querySelector('#quantity');
+    let message = document.querySelector('#message');
+    let quantity_in_stock = document.querySelector('#quantity_in_stock');
+    let add_to_cart = document.querySelector('#add_to_cart')
+
+    function quantity_v(){
+        if ( quantity.value == ''){
+            add_to_cart.setAttribute('disabled', 'true')
+        }
+        else{
+            add_to_cart.removeAttribute('disabled');
+        }
+    }
+
+    quantity_v()
+    
+    quantity.onkeyup = function(){
+
+        quantity_v()
+
+        $.ajax({
+
+            url: '/ajax/quantity_validate/',
+            data: {'quantity':this.value, 'quantity_in_stock': quantity_in_stock.value},
+            dataType: 'json',
+            success: function(data){
+
+                if ( data.validation ){
+                    message.style.color = 'rgb(201, 0, 0)';
+                    message.innerHTML = 'Quantity is not valid';
+                    add_to_cart.setAttribute('disabled', 'true');
+                }
+
+                else{
+                    message.style.color = 'green';
+                    message.innerHTML = 'Okey';
+                    add_to_cart.removeAttribute('disabled');
+                }
+
+            }
+
+        })
+
+    }
+
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    font-family: sans-serif;
+    width: 100vw;
+    height: 100vh;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid green;
+    padding: 50px;
+    border-radius: 10px;
+}
+
+.content h3{
+    text-align: center;
+}

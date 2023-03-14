@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>Login</title>{% endblock %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{% static 'styles/forms.css' %}">
+
+<form method='post'>
+    {% csrf_token %}
+
+    <label for='email'>Email:</label>
+    <input type='email' name='email' id='email'>
+
+    <label for='password'>Password:</label>
+    <input type='password' name='password' id='password'>
+
+    <span style='color: rgb(192, 0, 0); margin: 20px'>{{error}}</span>
+
+    <button type='submit'>Login</button>
+
+    <div class='link'>
+        <label>Don't have an account</label>
+        <a href="{% url 'signup' %}">Sign up</a>
+    </div>
+</form>
+
+{% endblock %}

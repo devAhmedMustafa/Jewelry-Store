@@ -1,0 +1,1 @@
+web: gunicorn StoreP.wsgi --log-file -

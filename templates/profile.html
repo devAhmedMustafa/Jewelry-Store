@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>Profile</title>{% endblock %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{% static 'styles/profile.css' %}">
+
+<div class="user_data">
+
+    <div class="shipping_data">
+
+      <section><h3>Name</h3><h5>{{user.first_name}} {{user.last_name}}</h5></section>
+      <section><h3>Email</h3><h5>{{user.email}}</h5></section>
+      <section><h3>Phone Number</h3><h5>{{shipData.phone_number}}</h5></section>
+      <section><h3>Address</h3><h5>{{shipData.address}}/ {{shipData.city}}</h5></section>
+      <a class="logout" href="{% url 'logout' %}">Logout</a>
+
+    </div>
+
+    <div class="contact-us">
+
+      <a><img src="{% static 'SVGs/icons8-facebook.svg' %}" width="55px"></a>
+      <a><img src="{% static 'SVGs/icons8-instagram.svg' %}" width="55px"></a>
+      <a><img src="{% static 'SVGs/icons8-whatsapp.svg' %}" width="55px"></a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

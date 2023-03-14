@@ -1,0 +1,13 @@
+{% load static %}
+
+<link rel='stylesheet' href="{% static 'styles/normalize.css' %}">
+<link rel='stylesheet' href="{% static 'styles/done_process.css' %}">
+
+<div class="container">
+    <div class='content'>
+        <img src="{% static 'SVGs/icons8-checkmark.svg' %}">
+        <h3>{{message}}</h3>
+    </div>
+</div>
+
+<script src="{% static 'JS/done_process_redirect.js' %}"></script>

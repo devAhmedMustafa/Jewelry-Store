@@ -1,0 +1,25 @@
+.cart_options{
+    display: flex;
+    flex-direction: row;
+}
+
+.cart_options button{
+    padding: 7px;
+    border: 1px solid navajowhite;
+    border-radius: 5px;
+    background: none;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.cart_options :first-child button:hover{
+    background-color: #1cb71a;
+    color: white;
+    border: 1px solid #1cb71a;
+}
+
+.cart_options :last-child button:hover{
+    background-color: #b71a1a;
+    color: white;
+    border: 1px solid #b71a1a;
+}

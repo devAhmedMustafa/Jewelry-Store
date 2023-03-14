@@ -1,0 +1,63 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>Sign Up</title>{% endblock %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{% static 'styles/forms.css' %}">
+
+<form method='post' class='form' novalidate>
+    {% csrf_token %}
+
+    {{ form }}
+    <button type='submit' id='register'>Register</button>
+
+    <div class='link'>
+        <label class='link'>Already have an account?</label>
+        <a href="{% url 'login' %}">Login</a>
+    </div>
+
+</form>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+$('#id_email').change( function(){
+    var email = $(this).val();
+
+    $.ajax({
+        url:'/ajax/user_validate/', 
+        data:{
+            'email':email
+        },
+        dataType: 'json', 
+        success: function(data){
+
+            email_field = document.querySelector('#id_email');
+
+            if (data.is_taken){
+
+                register = document.querySelector('#register');
+
+                email_field.style.borderColor = 'rgb(192, 0, 0)';
+
+                register.setAttribute('disabled', 'true');
+
+            }
+            else{
+
+                email_field.style.borderColor = 'navajowhite';
+                register.removeAttribute('disabled');
+
+            }
+        }
+    });
+} )
+
+</script>
+
+<script src="{% static 'JS/passwordCheck.js' %}"></script>
+{% endblock %}

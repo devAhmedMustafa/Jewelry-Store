@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>Buyings</title>{% endblock %}
+
+{% block content %}
+
+<link rel='stylesheet' href="{% static 'styles/cart.css' %}">
+
+<div class="productsSection">
+
+    <h1 class='title'>Buyings</h1>
+
+    <section class="section">
+
+        {% for p in products %}
+
+        <a href="{% url 'product' p.product.pk %}">
+
+            <div class="product">
+
+                <img src={{p.product.img.url}}>
+
+                <h3>{{p.product.name}}</h3>
+                <h4>{{p.product.price}} L.E.</h4>
+                <h6>{{p.date}}</h6>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </section>
+
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}

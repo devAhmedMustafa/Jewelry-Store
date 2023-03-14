@@ -1,0 +1,119 @@
+{% load static %}
+
+<link rel='stylesheet' href="{% static 'styles/header.css' %}">
+<link rel='stylesheet' href="{% static 'styles/normalize.css' %}">
+<link rel='stylesheet' href="{% static 'styles/content.css' %}">
+
+<meta charset="UTF-8">
+
+{% block title %}{% endblock %}
+
+<div class="container">
+    <div class="header">
+
+        {% if user.is_authenticated == True %}
+        <section class="userlist">
+            <a href="{% url 'cart' %}"><img src="{% static 'SVGs/shopping-cart_1.svg'%}" width="30px"></a>
+            <a href="{% url 'buyings' %}"><img src="{% static 'SVGs/purchase.svg'%}" width="30px"></a>
+            <a href="{% url 'profile' %}"><img src="{% static 'SVGs/user.svg'%}" width="31px" class="userbio"></a>
+        </section>
+        {% endif %}
+
+        {% if user.is_authenticated == False %}
+        <section class="links">
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Sign up</a>
+        </section>
+        {% endif %}
+
+        <a href="{% url 'home' %}"><img src="{% static 'SVGs/Logo.svg'%}" width="120px" class="logo"></a>
+        
+        <input type="search" placeholder="Search" id='search' class='search'>
+
+    </div>
+    <section class="jewelry">
+        {% for type in types %}
+            <a href="{% url 'jewelry' type.pk %}">{{type.name}}</a>
+        {% endfor %}
+        
+    </section>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<script>
+
+    $('#search').change( function(){
+
+        if ( $(this).val() ){
+
+            $.ajax({
+
+                url: '/ajax/search/',
+                data: {'searchInput': $(this).val()},
+                dataType: 'json',
+                success: function(data){
+    
+                    
+                    prods = JSON.parse(data.products)
+                    productsDiv = document.querySelector('.content');
+                    productsDiv.innerHTML = ``;
+                    productsDiv.innerHTML += `<div class="productsSection">
+    
+                        <h1 class='title'>Search Results</h1>
+                    
+                        <section class="section" id='section'>
+                    
+                        </section>
+                    
+                    </div>`;
+                    if (data.does_exist){
+
+                        for(let i = 0; i <= prods.length; i++){
+    
+                            document.querySelector('#section').innerHTML += `<a href="/product/${prods[i].id}/">
+                            
+                                <div class="product">
+                    
+                                </div>
+                    
+                            </a>`
+        
+                            product = document.querySelectorAll('.product')[i]
+        
+                            product.innerHTML += `<img src="/media/${prods[i].img}">
+                        
+                            <h3>${prods[i].name}</h3>
+                            <h4>${prods[i].price} L.E.</h4>`
+    
+                            if ( prods[i].on_stock == true ){
+                                product.innerHTML += `<span class="stock stock_green"></span><label style='color: green'>In Stock</label>`;
+                            }
+                            else if ( prods[i].on_stock == false ){
+                                product.innerHTML += `<span class="stock stock_red"></span><label style='color: rgb(192, 0, 0)'>Out Of Stock</label>`;
+                            }
+                            
+            
+                        }
+                    }
+
+                    else{
+
+                        document.querySelector('#section').innerHTML += `Nothing found`;
+
+                    }
+                }
+            })
+
+        }
+        
+    } )
+
+</script>
+
+{% block javascript %}
+{% endblock %}

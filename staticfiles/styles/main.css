@@ -1,0 +1,33 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "jetbrains mono";
+  color: white;
+}
+
+body{
+  background-image: linear-gradient(to top, #214d39 0%, #3c8d73 100%);
+}
+
+.header {
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+  position: sticky;
+}
+
+.header svg{
+  margin-right: auto;
+}
+
+.header .bio{
+  display: flex;
+  flex-direction: row;
+}
+
+.header .bio a{
+  margin: 10px;
+  border: none;
+}

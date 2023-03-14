@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}<title>Jewelry</title>{% endblock %}
+
+
+{% block content %}
+
+{% for type in types %}
+
+<div class="productsSection">
+
+    <h1 class='title'>{{type}}</h1>
+
+    <section class="section">
+
+        {% for product in products %}
+
+        {% if product.type == type %}
+
+        <a href="{% url 'product' product.pk %}">
+
+            <div class="product">
+
+                <img src={{product.img.url}}>
+
+                <h3>{{product.name}}</h3>
+                <h4>{{product.price}} L.E.</h4>
+
+                {% if product.on_stock == True %}
+                <span class="stock stock_green"></span><label style='color: green'>In stock</label>
+                {% endif %}
+
+                {% if product.on_stock == False %}
+                <span class="stock stock_red"></span><label style='color: rgb(192, 0, 0)'>Out Of Stock</label>
+                {% endif %}
+
+            </div>
+
+        </a>
+
+        {% endif %}
+
+        {% endfor %}
+
+    </section>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
