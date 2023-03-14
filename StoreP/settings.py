@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-$+sev)o+#3o4!7n+(5ihnjy58i+m!-@w%w(1y9rz$93w!sr5cg
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://jewelry-store-production-fca3.up.railway.app/']
 
 
 # Application definition
@@ -30,9 +30,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'products',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    '**corsheaders.middleware.CorsMiddleware**',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
