@@ -10,6 +10,8 @@
     background: none;
     cursor: pointer;
     margin: 5px;
+    color: black;
+    -webkit-text-fill-color: #000000;
 }
 
 .cart_options :first-child button:hover{
