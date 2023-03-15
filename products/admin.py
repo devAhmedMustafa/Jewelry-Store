@@ -12,7 +12,7 @@ class TypeAdmin(admin.ModelAdmin):
     inlines = [InlineProduct]
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('type', 'price', 'left')
+    list_display = ('name' ,'type', 'price', 'left')
     list_editable = ('price',)
     list_filter = ('type', 'on_stock')
     search_fields = ('name', 'type')
