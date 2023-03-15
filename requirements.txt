@@ -8,6 +8,7 @@ django-cors-headers==3.14.0
 django-modeltranslation==0.18.9
 django-phonenumber-field==7.0.2
 django-shopping-cart==0.1
+django-suit @ https://github.com/darklow/django-suit/tarball/v2
 django-taggit==3.1.0
 django-translator==1.1.0
 Django-Verify-Email==2.0.3
