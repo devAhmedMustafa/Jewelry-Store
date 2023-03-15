@@ -1,0 +1,52 @@
+.content {
+    background-color: rgb(250, 250, 250);
+    display: grid;
+    justify-content: center;
+    padding:30px;
+    margin: 30px;
+    border-radius: 10px;
+}
+
+.content section {
+    background-color: rgb(32, 32, 32);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    max-height: 300px;
+    cursor: pointer;
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.content label {
+    position: absolute;
+    padding: 10px;
+    font-size: 40px;
+    text-align: center;
+}
+
+section img{
+    animation: opacity-off 1s;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    opacity: 0.5;
+}
+
+section img:hover{
+    animation: opacity-up 1s;
+    opacity: 1;
+}
+
+@keyframes opacity-up {
+    from{opacity: 0.5}
+    to{opacity: 1}
+}
+
+@keyframes opacity-off {
+    from{opacity: 1}
+    to{opacity: 0.5}
+}

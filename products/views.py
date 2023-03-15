@@ -111,12 +111,14 @@ def delete_from_cart(request, productId):
 @login_required
 def complete_buying(request, productId):
 
-    product = Product.objects.get(pk=productId)
-    quantity = Cart.objects.get(product=product).quantity
+    
     user = request.user
     ship_data = ShippingData.objects.get(user=user)
 
     if request.method == 'POST':
+
+        product = Product.objects.get(pk=productId)
+        quantity = Cart.objects.get(product=product, user=user).quantity
 
         if Product.objects.get(pk=productId).left != 0:
 
@@ -127,7 +129,7 @@ def complete_buying(request, productId):
             data = Buying(user=user, product=product, quantity=quantity, address=address, is_paid=True)
             data.save()
             
-            Cart.objects.get(product=product).delete()
+            Cart.objects.get(product=product, user=user).delete()
             return render(request, 'done_process.html', {'message':'Your Payment process is done'})
     
     return HttpResponse('Done')

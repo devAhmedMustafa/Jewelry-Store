@@ -10,9 +10,10 @@ class InlineProduct(admin.StackedInline):
 
 class TypeAdmin(admin.ModelAdmin):
     inlines = [InlineProduct]
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('type', 'price', 'left')
-    list_editable = ('name', 'type', 'price')
+    list_editable = ('price',)
     list_filter = ('type', 'on_stock')
     search_fields = ('name', 'type')
 
