@@ -17,7 +17,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://jewelry-store-production-fca3.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://jewelry-store-production-fca3.up.railway.app']
 
 # Application definition
 
