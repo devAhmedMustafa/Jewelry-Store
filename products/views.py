@@ -101,10 +101,12 @@ def buy_now(request, productId):
 @login_required
 def delete_from_cart(request, productId):
 
+    user = request.user
+
     if request.method == 'POST':
 
         product = Product.objects.get(pk=productId) # product to be deleted
-        Cart.objects.get(product=product).delete()
+        Cart.objects.get(product=product, user=user).delete()
 
     return redirect('cart')
 
