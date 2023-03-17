@@ -1,0 +1,65 @@
+{% load static %}
+
+<meta charset="UTF-8">
+<title>Orders</title>
+<link rel="stylesheet" href="{% static 'styles/orders.css' %}">
+<link rel="stylesheet" href="{% static 'styles/normalize.css' %}">
+<meta name='viewport' content="width=device-width, initial-scale=1.0">
+
+<div class="container">
+  <div class="list">
+    <a href="{% url 'delivered' %}">Delivered</a>
+    <a href="{% url 'being_delivered' %}">Being Delivered</a>
+    <a href="{% url 'orders' %}">Orders</a>
+  </div>
+  <div class="content">
+    <h1>{{title}}</h1>
+    {% for order in orders %}
+
+    <div class="order">
+        <div class="image">
+            <img src={{order.product.img.url}} width="200px">
+        </div>
+
+        <div class="details">
+            <h1>{{order.product.name}}</h1>
+            <h3>{{order.product.price}}L.E.</h3>
+            <h5>{{order.serial_key}}</h5>
+            <h5>{{order.date}}</h5>
+        </div>
+
+        <div class="shipping_data">
+            <h2>{{ship_data.user.first_name}} {{ship_data.user.last_name}}</h2>
+            <h3>{{shipping_data.phone_number}}</h3>
+            <h5>{{order.address}}</h5>
+        </div>
+            
+
+        <div class="status" id='status'>
+            <input type='text' value={{order.status}} style="display:none"></input>
+
+            {% if order.status == 'requested' %}
+                <h6>Accept</h6>
+            {% elif order.status == 'on_your_way' %}
+                <h6 style='background-color:grey'>Out for delivery</h6>
+            {% elif order.status == 'delivered' %}
+                <h6 style='background-color:green'>Delivered</h6>
+            {% endif %}
+
+            
+            <input type='number' value={{order.id}} style='display:none'></input>
+        </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+<script src="{% static 'JS/activate_orders.js' %}">
+
+
+
+</script>

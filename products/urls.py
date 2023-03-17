@@ -13,4 +13,8 @@ urlpatterns = [
     path('complete_buying/<int:productId>', views.complete_buying, name='complete_buying'),
     path('buyings/', views.buyings, name='buyings'),
     path('ajax/quantity_validate/', views.quantity_validate, name='quantity_validate'),
+    path('orders/', views.order_requests, name='orders'),
+    path('delivered', views.delivered, name='delivered'),
+    path('being_delivered', views.being_delivered , name='being_delivered'),
+    path('ajax/order_status/', views.orders_status, name='order_status'),
 ]

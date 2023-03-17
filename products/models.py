@@ -38,11 +38,12 @@ class Cart(models.Model):
 class Buying(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_paid = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, default='requested')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     address = models.CharField(max_length=400)
     date = models.DateField(default=datetime.now, null=True)
+    serial_key = models.CharField(max_length=10, null=True)
 
     def __str__(self):
         return self.product.name

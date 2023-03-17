@@ -5,7 +5,7 @@ from . import functions
 import json
 from django.contrib.auth.decorators import login_required
 from accounts.models import ShippingData
-from django.db.models import F
+from django.db.models import F, Q
 
 # Create your views here.
 
@@ -128,7 +128,7 @@ def complete_buying(request, productId):
             
             Product.objects.filter(pk=productId).update(left=F('left') - int(quantity))
 
-            data = Buying(user=user, product=product, quantity=quantity, address=address, is_paid=True)
+            data = Buying(user=user, product=product, quantity=quantity, address=address, serial_key=functions.add_serial_key())
             data.save()
             
             Cart.objects.get(product=product, user=user).delete()
@@ -162,4 +162,76 @@ def quantity_validate(request):
         'validation': validation
     }
 
+    return JsonResponse(data)
+
+@login_required
+def order_requests(request):
+
+    user = request.user
+
+    if user.is_superuser == True and user.is_staff == True:
+        
+        ship_data = ShippingData.objects.get(user=user)
+        orders = Buying.objects.filter(Q(status__iexact = 'requested'))
+
+        return render(request, 'orders.html', {'orders':orders, 'title': 'Orders', 'ship_data':ship_data, 'user':user})
+
+    else:
+        return redirect('buyings')
+    
+@login_required
+def being_delivered(request):
+
+    user = request.user
+
+    if user.is_superuser == True and user.is_staff == True:
+        
+        ship_data = ShippingData.objects.get(user=user)
+        orders = Buying.objects.filter(Q(status__iexact = 'on_your_way'))
+
+        return render(request, 'orders.html', {'orders':orders, 'title': 'Being Delivered', 'ship_data':ship_data, 'user':user})
+
+    else:
+        return redirect('buyings')
+    
+@login_required
+def delivered(request):
+
+    user = request.user
+
+    if user.is_superuser == True and user.is_staff == True:
+        
+        ship_data = ShippingData.objects.get(user=user)
+        orders = Buying.objects.filter(Q(status__iexact = 'delivered'))
+
+        return render(request, 'orders.html', {'orders':orders, 'title': 'Delivered', 'ship_data':ship_data, 'user':user})
+
+    else:
+        return redirect('buyings')
+
+def orders_status(request):
+    
+    status = request.GET.get('status')
+    order_id = request.GET.get('order_id')
+
+    order = Buying.objects.get(pk=order_id)
+
+    data = {
+
+    }
+
+    if status == 'requested':
+
+        data['status'] = 'on_your_way'
+        
+        order.status = 'on_your_way'
+        order.save()
+
+    elif status == 'on_your_way':
+
+        data['status'] = 'delivered'
+
+        order.status = 'delivered'
+        order.save()
+    
     return JsonResponse(data)
