@@ -6,9 +6,11 @@ import json
 from django.contrib.auth.decorators import login_required
 from accounts.models import ShippingData
 from django.db.models import F, Q
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 # Create your views here.
 
+@xframe_options_exempt
 def home(reqeust):
 
     functions.check_left()
